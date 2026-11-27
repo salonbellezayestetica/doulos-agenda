@@ -1,48 +1,87 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0D1433">
-<title>Doulos Agenda | Reserva en línea</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1B2456">
+<meta name="description" content="Doulos Agenda: plataforma de agendamiento adaptable a tu negocio.">
+<title>Doulos Agenda · Soluciones Empresariales</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--brand:#65A5FF;--bg:#F6F8FD;--ink:#0D1433}*{box-sizing:border-box}
-body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--bg)}
-header{display:flex;align-items:center;justify-content:space-between;padding:19px max(5%,calc((100% - 1100px)/2));background:#0D1433;border-bottom:1px solid #273660;gap:12px}
-.logo{font-size:19px;font-weight:800;color:#FFFFFF;text-decoration:none}.logo small{display:block;font-size:10px;letter-spacing:2px;margin-top:6px;color:#A9C9FA}
-.tag{font-size:12px;border:1px solid #456094;border-radius:30px;padding:9px 12px;color:#FFFFFF}
-main{max-width:1100px;margin:38px auto 70px;padding:0 20px}
-.hero{display:grid;grid-template-columns:1fr 0.85fr;background:linear-gradient(120deg,#EAF1FF,#fff 80%);border:1px solid #D8E5FB;border-radius:24px;overflow:hidden;min-height:410px}
-.copy{padding:60px 46px;align-self:center}.eyebrow{color:#356EC2;font-size:11px;font-weight:bold;letter-spacing:2px;text-transform:uppercase}
-h1{font-size:clamp(32px,4vw,50px);line-height:1.12;margin:18px 0;letter-spacing:-1px}
-.copy p{color:#52627A;line-height:1.7;font-size:17px;margin-bottom:28px}
-.btn{display:inline-block;color:#0D1433;background:var(--brand);font-weight:bold;padding:16px 24px;border-radius:12px;text-decoration:none}
-.art{background:linear-gradient(145deg,#142B63,#65A5FF);min-height:310px;display:grid;place-items:center;padding:36px}
-.art-card{background:#fff;box-shadow:0 16px 44px #07153340;padding:30px;border-radius:22px;max-width:290px;transform:rotate(-5deg)}
-.art-card span{font-size:46px}.art-card h2{font-size:25px;margin:14px 0}.art-card p{color:#52627A;font-size:14px;line-height:1.6;margin:0}
-.section-title{text-align:center;margin:57px 0 26px}.section-title h2{font-size:28px;margin:0 0 12px}.section-title p{color:#52627A;margin:0}
-.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.step{background:white;border:1px solid #D9E3F5;border-radius:18px;padding:25px}
-.step .ico{font-size:30px}.step h3{font-size:18px;margin:17px 0 10px}.step p{font-size:14px;color:#52627A;line-height:1.6}
-.note{text-align:center;padding:16px 20px;background:#fff;border:1px dashed #8FB6ED;border-radius:12px;color:#405576;font-size:13px;line-height:1.6;margin-top:24px}
-footer{padding:0 20px 35px;text-align:center;color:#64748B;font-size:12px}
-@media(max-width:760px){.hero{grid-template-columns:1fr}.copy{padding:40px 28px}.art{min-height:230px}.art-card{transform:none}.steps{grid-template-columns:1fr}header{padding:17px 20px}}
-.brand-image{display:flex;align-items:center;text-decoration:none}.brand-image img{display:block;width:106px;height:auto;border-radius:3px}header{min-height:118px}@media(max-width:760px){.brand-image img{width:88px}}
+:root{--night:#1B2456;--sky:#58A5FF;--electric:#0075FF;--cloud:#F6F6F6;--ink:#2E2B26;--pale:#EAF3FF}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--cloud);color:var(--ink);font-family:"Plus Jakarta Sans",Arial,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Arial,sans-serif;letter-spacing:-.035em}
+a{color:inherit}
+.topbar{background:var(--night);color:white}
+.nav{max-width:1160px;margin:auto;min-height:105px;padding:15px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:16px;text-decoration:none}
+.brand img{width:91px;height:auto;display:block;object-fit:contain}
+.brand-text{padding-left:17px;border-left:1px solid #ffffff35;line-height:1.45}
+.brand-text b{display:block;font-size:17px;letter-spacing:-.03em}
+.brand-text span{font-size:11px;color:#B8D6FF;letter-spacing:.08em}
+.nav-link{font-size:13px;text-decoration:none;border:1px solid #ffffff50;padding:12px 17px;border-radius:100px;font-weight:700;white-space:nowrap}
+.hero{background:radial-gradient(circle at 84% 20%,#0875f54a,transparent 37%),linear-gradient(112deg,#1B2456 24%,#0B56BD 75%,#1B2456);color:white;position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;opacity:.14;background-image:radial-gradient(#b9d7ff 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.hero-wrap{position:relative;max-width:1160px;margin:auto;min-height:510px;padding:80px 28px;display:grid;grid-template-columns:1.12fr .88fr;align-items:center;gap:60px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;border:1px solid #ffffff55;border-radius:100px;color:#c7e2ff;font-weight:700;font-size:11px;letter-spacing:.1em;padding:9px 13px;text-transform:uppercase}
+h1{font-size:clamp(41px,5vw,69px);line-height:1.02;margin:25px 0 21px;max-width:700px}
+h1 em{font-style:normal;color:#A9CEFF}
+.hero p{color:#dae8ff;line-height:1.8;font-size:16px;max-width:510px;margin:0 0 30px}
+.cta{display:inline-flex;gap:10px;align-items:center;background:#fff;color:var(--night);text-decoration:none;font-weight:700;border-radius:100px;padding:15px 22px;font-size:14px}
+.hero-visual{min-height:300px;position:relative;display:flex;align-items:center;justify-content:center}
+.orbit{position:absolute;border:1px solid #ffffff27;border-radius:50%;width:425px;height:425px;max-width:110%;pointer-events:none}
+.preview{width:min(100%,390px);background:white;color:var(--night);border-radius:24px;padding:23px;box-shadow:0 26px 65px #020c2e55;transform:rotate(-2deg);position:relative}
+.preview-top{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;border-bottom:1px solid #E4EAF5;padding-bottom:17px}
+.preview-icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:var(--pale);color:var(--electric);font-size:20px}
+.preview h3{margin:21px 0 8px;font-size:24px}
+.preview p{color:#6c7691;font-size:12px;line-height:1.7;margin:0 0 15px}
+.preview-step{border:1px solid #DAE6F8;border-radius:12px;padding:13px 14px;display:flex;justify-content:space-between;align-items:center;font-size:13px;margin-top:10px}
+.preview-step span{color:var(--electric);font-weight:800}
+main{max-width:1160px;padding:0 28px;margin:auto}
+.heading{text-align:center;padding:70px 0 28px}
+.heading .mini{font-size:11px;letter-spacing:.16em;color:var(--electric);font-weight:800;text-transform:uppercase}
+.heading h2{font-size:clamp(29px,3vw,39px);margin:14px 0 13px;color:var(--night)}
+.heading p{color:#667188;font-size:14px;margin:0;line-height:1.7}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.tile{background:#fff;border:1px solid #E4E9F2;border-radius:19px;padding:27px;min-height:192px}
+.tile .icon{display:grid;place-items:center;border-radius:14px;background:#E6F1FF;color:var(--electric);font-size:22px;width:48px;height:48px}
+.tile h3{color:var(--night);font-size:20px;margin:21px 0 11px}
+.tile p{color:#647084;font-size:13px;line-height:1.75;margin:0}
+.info{margin:27px 0 70px;border-radius:16px;background:#E8F1FF;border:1px solid #C8DFFB;padding:17px 22px;color:#365680;line-height:1.75;font-size:13px}
+footer{background:var(--night);padding:26px 28px;text-align:center;color:#C6DBF8;font-size:12px}
+@media(max-width:850px){.hero-wrap{grid-template-columns:1fr;padding:58px 25px;gap:36px}.hero-visual{min-height:260px}.preview{transform:none}.orbit{width:310px;height:310px}.grid{grid-template-columns:1fr}.nav{padding:14px 20px}.brand img{width:72px}.brand-text{display:none}main{padding:0 20px}.heading{padding-top:50px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style>
 </head>
 <body>
-<header><a class="brand-image" href="#inicio" aria-label="Doulos Agenda"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACPCAIAAADyV0eZAAAFYElEQVR42u2dTW4kIQyFK6i2k9XkJJP7nyA3yS4nmEVLrVYKjAEDhvreYjTqUID9jPkz8Pbn778D7IuACiAYQDCAYADBAIIBBAMIhmAAwQCCAQQDCAYQDCAYggEEAwgGznA6r9/P91dR+vePz4WKG4A3hzFZpVo20fuUQu9FcLuKW9RtWLorps/9qJ1egUduTmgO0zU7nd1drXY+wbtS68p8A+zuLWnYUubS/q93fzmR4wmj6K7SDp4H+x9djyZYr0H/awhLCHU6VMRC1L5W2OeoInjT1HLsFtnleCMY56Kzsq1LrWdJw0Lmv1NT3o1g2ah3Ylcj0UhHHbD3veUKc5vvruwyir4FBPMd5qUDzXdvnEvX3v/K4vvH59wFkBNSlQUt6m+m9cF1+prYGsyLHiMLgyxG0QCCAQQDCB41dVmu6CUJrh5DTtkz7lHiGClWXehYpT3tHzbLeuR9++A7BL7ffZB1n/D3WY4t7CQMzdfjNGnLRuwnRGkQwX5ilO5msgGlDBZkcIc1juCsYBtw7FAEj2eTVhyUuT2Vc3pWln+mi5rsLU4XHo4DqfY7O3rMumXH2wHwXdmdNor25nt3ZfdYLuhuudHsdFM+pwu/2SVZ3rwUh88W3sxfZppk3pSJ7Jk8iu7qM6eE1Ludsr/xAvjeIGwWggEEAwgGEAwgGEAwgGAIBhAMIBhAMIBgAMEAgm+L8yZyLhRMTwuuZ/e435FzXDQuuqG5bOAVVxeHFoyLBhAMIBhAMIBgAMEAgu+EsoWOHq9c7fdupZWWTPI5TWh4JCglQ7Ms/EijuWPLxBSUxQ0Qx6qe+dOF7avz0XqUZpsSRvN8lfKJq9dkzzTKpcoKLSklqstE2wd32nupyPbn+6vrRlBL5nXfRr8qzSqbPizBbu8qLS2OnEnNbtIvt1BUy1Tiq6tZYuPWVpxoGk1WwhAklBZ2zUj/DIpeHVZd1BSkxKnovJWaEfQfWkzJZD4jfDjlBZ3G5ttJS6l8sioKvS3X/BPPjXikOErrD12rLouhzNNnI2552Gvk3CF4MOE90C67MOyoZjoYNjXQ20oqmA53aByvn3swVpP+TknzboHvqRmhKyekmRpZrWyHVWjr2us7HJa3ry4kCV50UWnLoeKD5pb1gDCsqQ1rN+br9U7cgMC0UHQYVvtOEQGNLmf87Fyz12sYBBEMa1+3CViRQFO96sX98Y34de/5mYNV3YJV7atfvBI+1AuZyjmVQ+pPRZZdIY6JsEWQIjqUmz9FLlQ5Hq4bNve41Fv24fp6apRZvV0oqKWG4EbFtWTb7wFE/e5kP3F6rG+H8bOFHhuLjZm3SGooTg+Fhykzwq4bi0WzRpMtZ0NxzDWjfbNBP4Yqmnj0frSzKIakfR5lKI7VM61lj3JUDLtahHGyojRRnPaseHVlc3A2CYIBBAMIBhAMIBhAMIBgCAbbIBM2e71mOfrLr03N6J9+fSj8KZXJdckwewt09JNobYXMj8Qyu1CHaymygLI+sxWrJPgq/GtViq7FiOoxaxDyhlo2cUoFcuz0I+7i8f9r/tdVd8G2rgH3dXeJpPSg2ZBQXeEQPRnw/vFpeDFFtv1Fs2q8x70iaidqoEoDEuyg3zb2mf2+5eKZCoGj/AnNQuOl5SPIv1LKfUe1irJpipyB3rKDRtEaXeupKgqly16QkzX/6CevflhIf81cOL3/qOr1X1mNR1Wc7LNiNpewvNqL5m6Yq3ivP6aiyCoC1m0vMRGaaSqaNfq7/izCs1lHxzqabiJbSmY/OOpYrj9ex4Garyr8QWpUr4mysD3FpK9AdSnyLOPoEdEBWOgAEAwgGEAwgGBwHP8Bjpzk+myVIeoAAAAASUVORK5CYII=" alt="Doulos Soluciones Empresariales"></a><span class="tag">Agenda en línea</span></header>
-<main id="inicio">
-<section class="hero">
-<div class="copy"><span class="eyebrow">Organiza tu tiempo</span><h1>Bienvenido a Doulos Agenda</h1><p>Reserva tu próximo servicio de una forma sencilla. Cada negocio podrá personalizar aquí su nombre, logo, imagen y colores.</p><a class="btn" href="#como-funciona">Conoce cómo agendar →</a></div>
-<div class="art"><div class="art-card"><span aria-hidden="true">📅</span><h2>Tu próxima cita</h2><p>Elige lo que necesitas y encuentra el momento ideal para tu visita.</p></div></div>
-</section>
-<section id="como-funciona"><div class="section-title"><h2>Agenda en tres pasos</h2><p>Un proceso sencillo y adaptable a diferentes tipos de negocio.</p></div>
-<div class="steps">
-<div class="step"><span class="ico">🗂️</span><h3>1. Elige tu servicio</h3><p>Consulta los servicios que ofrece el negocio.</p></div>
-<div class="step"><span class="ico">👤</span><h3>2. Elige profesional</h3><p>Selecciona quién te atenderá, cuando corresponda.</p></div>
-<div class="step"><span class="ico">🗓️</span><h3>3. Selecciona fecha y hora</h3><p>Escoge la disponibilidad y confirma tu reserva.</p></div>
+<div class="topbar">
+<header class="nav">
+<a class="brand" href="#inicio" aria-label="Doulos Agenda, inicio"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKAAAACPCAIAAADyV0eZAAAFYElEQVR42u2dTW4kIQyFK6i2k9XkJJP7nyA3yS4nmEVLrVYKjAEDhvreYjTqUID9jPkz8Pbn778D7IuACiAYQDCAYADBAIIBBAMIhmAAwQCCAQQDCAYQDCAYggEEAwgGznA6r9/P91dR+vePz4WKG4A3hzFZpVo20fuUQu9FcLuKW9RtWLorps/9qJ1egUduTmgO0zU7nd1drXY+wbtS68p8A+zuLWnYUubS/q93fzmR4wmj6K7SDp4H+x9djyZYr0H/awhLCHU6VMRC1L5W2OeoInjT1HLsFtnleCMY56Kzsq1LrWdJw0Lmv1NT3o1g2ah3Ylcj0UhHHbD3veUKc5vvruwyir4FBPMd5qUDzXdvnEvX3v/K4vvH59wFkBNSlQUt6m+m9cF1+prYGsyLHiMLgyxG0QCCAQQDCB41dVmu6CUJrh5DTtkz7lHiGClWXehYpT3tHzbLeuR9++A7BL7ffZB1n/D3WY4t7CQMzdfjNGnLRuwnRGkQwX5ilO5msgGlDBZkcIc1juCsYBtw7FAEj2eTVhyUuT2Vc3pWln+mi5rsLU4XHo4DqfY7O3rMumXH2wHwXdmdNor25nt3ZfdYLuhuudHsdFM+pwu/2SVZ3rwUh88W3sxfZppk3pSJ7Jk8iu7qM6eE1Ludsr/xAvjeIGwWggEEAwgGEAwgGEAwgGAIBhAMIBhAMIBgAMEAgm+L8yZyLhRMTwuuZ/e435FzXDQuuqG5bOAVVxeHFoyLBhAMIBhAMIBgAMEAgu+EsoWOHq9c7fdupZWWTPI5TWh4JCglQ7Ms/EijuWPLxBSUxQ0Qx6qe+dOF7avz0XqUZpsSRvN8lfKJq9dkzzTKpcoKLSklqstE2wd32nupyPbn+6vrRlBL5nXfRr8qzSqbPizBbu8qLS2OnEnNbtIvt1BUy1Tiq6tZYuPWVpxoGk1WwhAklBZ2zUj/DIpeHVZd1BSkxKnovJWaEfQfWkzJZD4jfDjlBZ3G5ttJS6l8sioKvS3X/BPPjXikOErrD12rLouhzNNnI2552Gvk3CF4MOE90C67MOyoZjoYNjXQ20oqmA53aByvn3swVpP+TknzboHvqRmhKyekmRpZrWyHVWjr2us7HJa3ry4kCV50UWnLoeKD5pb1gDCsqQ1rN+br9U7cgMC0UHQYVvtOEQGNLmf87Fyz12sYBBEMa1+3CViRQFO96sX98Y34de/5mYNV3YJV7atfvBI+1AuZyjmVQ+pPRZZdIY6JsEWQIjqUmz9FLlQ5Hq4bNve41Fv24fp6apRZvV0oqKWG4EbFtWTb7wFE/e5kP3F6rG+H8bOFHhuLjZm3SGooTg+Fhykzwq4bi0WzRpMtZ0NxzDWjfbNBP4Yqmnj0frSzKIakfR5lKI7VM61lj3JUDLtahHGyojRRnPaseHVlc3A2CYIBBAMIBhAMIBhAMIBgCAbbIBM2e71mOfrLr03N6J9+fSj8KZXJdckwewt09JNobYXMj8Qyu1CHaymygLI+sxWrJPgq/GtViq7FiOoxaxDyhlo2cUoFcuz0I+7i8f9r/tdVd8G2rgH3dXeJpPSg2ZBQXeEQPRnw/vFpeDFFtv1Fs2q8x70iaidqoEoDEuyg3zb2mf2+5eKZCoGj/AnNQuOl5SPIv1LKfUe1irJpipyB3rKDRtEaXeupKgqly16QkzX/6CevflhIf81cOL3/qOr1X1mNR1Wc7LNiNpewvNqL5m6Yq3ivP6aiyCoC1m0vMRGaaSqaNfq7/izCs1lHxzqabiJbSmY/OOpYrj9ex4Garyr8QWpUr4mysD3FpK9AdSnyLOPoEdEBWOgAEAwgGEAwgGBwHP8Bjpzk+myVIeoAAAAASUVORK5CYII=" alt="Doulos Soluciones Empresariales"><div class="brand-text"><b>Doulos Agenda</b><span>Una solución de Doulos</span></div></a>
+<a class="nav-link" href="#reserva">Conocer la agenda ↗</a>
+</header>
 </div>
-<div class="note">Estamos construyendo el sistema de reservas. Esta versión aún no permite confirmar citas reales. El acceso privado y la sincronización de Google Calendar se habilitarán después de las pruebas.</div>
-</section></main>
-<footer>DOULOS AGENDA · Soluciones Empresariales</footer>
-</body></html>
+<section class="hero" id="inicio"><div class="hero-wrap">
+<div><span class="eyebrow">Doulos Soluciones Empresariales</span><h1>Tu negocio, <em>tu agenda.</em></h1><p>Una experiencia de reservas sencilla y profesional, lista para adaptarse a la identidad, servicios y horarios de cada negocio.</p><a class="cta" href="#reserva">Conoce cómo funciona <span aria-hidden="true">→</span></a></div>
+<div class="hero-visual" aria-label="Vista ilustrativa del recorrido de reservas"><div class="orbit"></div><div class="preview">
+<div class="preview-top"><span class="preview-icon" aria-hidden="true">▦</span><span>Agenda personalizada</span></div>
+<h3>Reserva tu cita</h3><p>Así se organizará el recorrido de reserva de cada negocio.</p>
+<div class="preview-step"><strong>Servicio</strong><span>01 ↗</span></div>
+<div class="preview-step"><strong>Profesional</strong><span>02 ↗</span></div>
+<div class="preview-step"><strong>Fecha y hora</strong><span>03 ↗</span></div>
+</div></div>
+</div></section>
+<main id="reserva">
+<div class="heading"><span class="mini">Experiencia de agendamiento</span><h2>Fácil para tus clientes. Flexible para tu negocio.</h2><p>La marca, los servicios y los horarios se ajustarán a cada empresa desde su espacio de administración.</p></div>
+<div class="grid">
+<div class="tile"><span class="icon" aria-hidden="true">◈</span><h3>Identidad propia</h3><p>Cada negocio podrá mostrar su nombre, logo, portada y colores, sin usar la identidad visual de otro cliente.</p></div>
+<div class="tile"><span class="icon" aria-hidden="true">☷</span><h3>Reservas en línea</h3><p>Los visitantes podrán elegir servicio, profesional, fecha y horario disponible.</p></div>
+<div class="tile"><span class="icon" aria-hidden="true">▣</span><h3>Administración privada</h3><p>Citas, clientes y configuraciones quedarán dentro de un acceso protegido para cada negocio.</p></div>
+</div>
+<div class="info"><strong>Estado de desarrollo:</strong> esta portada ya es pública, pero todavía no recibe reservas reales. El sistema de citas, la personalización por negocio y la sincronización individual con Google Calendar se están desarrollando y probarán antes de su lanzamiento comercial.</div>
+</main>
+<footer>© Doulos Soluciones Empresariales · Conectar para servir.</footer>
+</body>
+</html>
