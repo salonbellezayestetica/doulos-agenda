@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
+<title>Administración | Doulos Agenda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#1B2456;--blue:#0075FF;--light:#58A5FF;--bg:#F6F6F6;--ink:#2E2B26}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:"Plus Jakarta Sans",Arial,sans-serif;color:var(--ink)}
+header{background:var(--navy);color:white;padding:22px max(20px,calc((100% - 1020px)/2));display:flex;justify-content:space-between;align-items:center;gap:18px}
+header strong{font-size:20px}header small{display:block;color:#a7caff;letter-spacing:.12em;font-size:10px;margin-top:5px}
+header a{color:white;font-size:13px}
+main{max-width:960px;margin:42px auto;padding:0 20px}
+.panel{background:white;border:1px solid #e1e6f3;border-radius:20px;padding:30px;box-shadow:0 12px 32px #1b245610}
+h1,h2{font-family:"Bricolage Grotesque",Arial,sans-serif;color:var(--navy);margin-top:0}
+h1{font-size:30px}h2{font-size:23px}p{line-height:1.6;color:#596477}
+label{display:block;margin-top:15px;color:var(--navy);font-size:13px;font-weight:700}
+input,select{width:100%;border:1px solid #cdd5e7;border-radius:10px;margin-top:7px;padding:13px;font:inherit;font-size:14px;background:white}
+input[type=color]{height:48px;padding:4px}
+button{cursor:pointer;background:var(--blue);border:0;border-radius:11px;color:white;padding:13px 20px;font:inherit;font-size:14px;font-weight:700;margin-top:20px}
+button.secondary{background:#e6effe;color:var(--navy)}
+button:disabled{opacity:.55;cursor:wait}
+.hidden{display:none!important}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 18px}
+.alert{font-size:13px;min-height:20px;margin-top:13px;color:#ad2635}
+.good{color:#145d44}
+.actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.small{font-size:12px;color:#62718e}
+@media(max-width:650px){.grid{grid-template-columns:1fr}.panel{padding:22px}}
+</style></head><body>
+<header><div><strong>Doulos Agenda</strong><small>ADMINISTRACIÓN PRIVADA</small></div><a href="./">Volver a la portada</a></header>
+<main>
+<section class="panel" id="loginSection">
+<h1>Accede a tu negocio</h1><p>Ingresa con el correo y la contraseña asignados a tu cuenta de Doulos Agenda.</p>
+<form id="loginForm">
+<label>Correo electrónico<input type="email" id="email" autocomplete="username" required></label>
+<label>Contraseña<input type="password" id="password" autocomplete="current-password" required></label>
+<button type="submit" id="loginButton">Iniciar sesión</button><p id="loginMessage" class="alert" role="status"></p>
+</form></section>
+<section class="panel hidden" id="adminSection">
+<div class="actions" style="justify-content:space-between"><h1>Personaliza tu negocio</h1><button class="secondary" id="logoutButton" type="button">Cerrar sesión</button></div>
+<p>Estos cambios se guardan en el negocio que administras. Otros negocios no podrán modificarlos con tu sesión.</p>
+<label>Negocio que administras<select id="orgSelect"></select></label>
+<form id="settingsForm" class="hidden">
+<div class="grid">
+<label>Nombre del negocio<input id="businessName" maxlength="120" required></label>
+<label>Correo de contacto<input id="contactEmail" type="email" maxlength="180"></label>
+<label>Teléfono de contacto<input id="contactPhone" type="tel" maxlength="40"></label>
+<label>Zona horaria<input id="timezone" maxlength="80" placeholder="America/Bogota"></label>
+<label>Color principal<input id="primaryColor" type="color" value="#1B2456"></label>
+<label>Color secundario<input id="secondaryColor" type="color" value="#58A5FF"></label>
+</div>
+<label>URL del logo<input id="logoUrl" type="url" maxlength="1500" placeholder="https://..."></label>
+<label>URL de la portada<input id="coverUrl" type="url" maxlength="1500" placeholder="https://..."></label>
+<p class="small">En esta primera versión se utilizan enlaces de imagen. La carga directa de fotografías se añadirá después.</p>
+<button id="saveButton" type="submit">Guardar personalización</button>
+<p id="saveMessage" class="alert" role="status"></p>
+</form>
+<p id="adminMessage" class="alert" role="status"></p>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.57.0/dist/umd/supabase.min.js"></script>
+<script>
+(function(){
+'use strict';
+const server='https://fwwhjghxuuguipcnpdlf.supabase.co';
+const publishable='sb_publishable_efRDEjJbksK7yXJM0WGMlA_ehsj24dC';
+const $=id=>document.getElementById(id);
+const form=$('settingsForm');
+let client, owned=[], currentId=null;
+function status(id,message,ok){const el=$(id);el.textContent=message||'';el.classList.toggle('good',!!ok)}
+function showLogged(logged){$('loginSection').classList.toggle('hidden',logged);$('adminSection').classList.toggle('hidden',!logged)}
+function val(id){return $(id).value.trim()}
+function fill(data){$('businessName').value=data.business_name||'';$('contactEmail').value=data.contact_email||'';$('contactPhone').value=data.contact_phone||'';$('timezone').value=data.timezone||'America/Bogota';$('primaryColor').value=/^#[0-9a-f]{6}$/i.test(data.primary_color||'')?data.primary_color:'#1B2456';$('secondaryColor').value=/^#[0-9a-f]{6}$/i.test(data.secondary_color||'')?data.secondary_color:'#58A5FF';$('logoUrl').value=data.logo_url||'';$('coverUrl').value=data.cover_image_url||''}
+async function loadSettings(){
+form.classList.add('hidden');status('adminMessage','');status('saveMessage','');
+currentId=$('orgSelect').value;
+if(!owned.some(o=>o.organization_id===currentId))return status('adminMessage','No tienes permisos de administración sobre ese negocio.');
+const {data,error}=await client.from('business_settings').select('business_name,contact_email,contact_phone,timezone,primary_color,secondary_color,logo_url,cover_image_url').eq('organization_id',currentId).maybeSingle();
+if(error)return status('adminMessage','No se pudieron cargar los ajustes: '+error.message);
+if(!data)return status('adminMessage','Este negocio aún no tiene una configuración inicial. Contacta al soporte.');
+fill(data);form.classList.remove('hidden');
+}
+async function loadAdmin(){
+status('adminMessage','Cargando negocios…');
+const {data:{user},error:authError}=await client.auth.getUser();
+if(authError||!user){showLogged(false);return}
+showLogged(true);
+const {data,error}=await client.from('organization_members').select('organization_id,role,organizations(name)').eq('user_id',user.id).in('role',['owner','admin']);
+if(error)return status('adminMessage','No se pudo revisar tu acceso: '+error.message);
+owned=data||[];
+const sel=$('orgSelect');sel.replaceChildren();
+owned.forEach(o=>{const option=document.createElement('option');option.value=o.organization_id;option.textContent=o.organizations?.name||'Negocio';sel.appendChild(option)});
+if(!owned.length){form.classList.add('hidden');return status('adminMessage','Tu cuenta no tiene negocios asignados como propietario o administrador.')}
+await loadSettings();
+}
+async function start(){
+if(!window.supabase?.createClient)return status('loginMessage','No se pudo cargar la conexión. Comprueba tu acceso a Internet.');
+client=window.supabase.createClient(server,publishable);
+$('loginForm').addEventListener('submit',async e=>{
+e.preventDefault();const btn=$('loginButton');btn.disabled=true;status('loginMessage','Validando acceso…');
+try{const {error}=await client.auth.signInWithPassword({email:val('email'),password:$('password').value});if(error){status('loginMessage','No se pudo iniciar sesión. Comprueba el correo y la contraseña.');return}$('password').value='';status('loginMessage','');await loadAdmin()}catch(_){status('loginMessage','No se pudo conectar. Inténtalo nuevamente.')}finally{btn.disabled=false}
+});
+$('orgSelect').addEventListener('change',loadSettings);
+$('logoutButton').addEventListener('click',async()=>{await client.auth.signOut();owned=[];currentId=null;form.classList.add('hidden');showLogged(false)});
+form.addEventListener('submit',async e=>{
+e.preventDefault();status('saveMessage','');
+if(!owned.some(o=>o.organization_id===currentId))return status('saveMessage','Acceso no autorizado.');
+const btn=$('saveButton');btn.disabled=true;
+const fields={business_name:val('businessName'),contact_email:val('contactEmail')||null,contact_phone:val('contactPhone')||null,timezone:val('timezone')||'America/Bogota',primary_color:val('primaryColor'),secondary_color:val('secondaryColor'),logo_url:val('logoUrl')||null,cover_image_url:val('coverUrl')||null};
+try{const {data,error}=await client.from('business_settings').update(fields).eq('organization_id',currentId).select('id');if(error)throw error;if(!data?.length)throw Error('No se guardaron cambios. Verifica los permisos de tu cuenta.');status('saveMessage','Cambios guardados correctamente.',true)}catch(e){status('saveMessage',e.message||'No se pudieron guardar los cambios.')}finally{btn.disabled=false}
+});
+const {data:{session}}=await client.auth.getSession();if(session)await loadAdmin();
+}
+start().catch(()=>status('loginMessage','Hubo un problema al iniciar la aplicación.'));
+})();
+</script>
+</body></html>
